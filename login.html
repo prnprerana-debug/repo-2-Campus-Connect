@@ -98,7 +98,7 @@
             color: var(--blue);
             font-size: 13px;
             margin: 0;
-            display: none;
+            display: block;
         }
 
         @media (max-width: 520px) {
@@ -125,6 +125,7 @@
             <a href="index.html">Home</a>
             <a href="information.html">Information</a>
             <a href="ask-seniors.html">Ask Seniors</a>
+            <a href="seniors.html">Senior Directory</a>
             <a href="projects.html">Projects</a>
             <a href="login.html" class="nav-cta active">Login</a>
         </nav>
@@ -173,8 +174,7 @@
                 </button>
 
                 <p class="login-message" id="loginMessage">
-                    Login form is ready. Backend authentication
-                    still needs to be connected.
+                    Demo login only: any valid email and password will continue.
                 </p>
 
             </form>
@@ -205,13 +205,11 @@
             mainNav.classList.toggle("open");
         });
 
-        // Frontend demonstration only
         const loginForm = document.getElementById("loginForm");
-        const loginMessage = document.getElementById("loginMessage");
 
         loginForm.addEventListener("submit", function (event) {
             event.preventDefault();
-            loginMessage.style.display = "block";
+            window.location.href = "seniors.html";
         });
     </script>
 
