@@ -51,4 +51,34 @@ document.addEventListener("DOMContentLoaded", () => {
       if (empty) empty.classList.toggle("hidden", visible !== 0);
     });
   }
+
+  const seniorSearch = document.getElementById("seniorSearch");
+  const seniorDepartment = document.getElementById("seniorDepartment");
+  const seniorTopic = document.getElementById("seniorTopic");
+  if (seniorSearch && seniorDepartment && seniorTopic) {
+    const cards = [...document.querySelectorAll(".senior-card")];
+    const empty = document.getElementById("emptySeniors");
+    const resultCount = document.getElementById("seniorResultCount");
+    const applyFilters = () => {
+      const term = seniorSearch.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesText = card.textContent.toLowerCase().includes(term);
+        const matchesDepartment = seniorDepartment.value === "all" ||
+          card.dataset.department === seniorDepartment.value;
+        const matchesTopic = seniorTopic.value === "all" ||
+          card.dataset.topic === seniorTopic.value;
+        const show = matchesText && matchesDepartment && matchesTopic;
+        card.classList.toggle("hidden", !show);
+        if (show) visible++;
+      });
+      if (empty) empty.classList.toggle("hidden", visible !== 0);
+      if (resultCount) {
+        resultCount.textContent = `${visible} ${visible === 1 ? "senior" : "seniors"} found`;
+      }
+    };
+    seniorSearch.addEventListener("input", applyFilters);
+    seniorDepartment.addEventListener("change", applyFilters);
+    seniorTopic.addEventListener("change", applyFilters);
+  }
 });
